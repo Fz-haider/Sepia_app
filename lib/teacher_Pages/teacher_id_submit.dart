@@ -8,7 +8,7 @@ class teacher_id_submit extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Teacher"),
+          title: Text("Teacher"),
           centerTitle: true,
         ),
         body: Column(
