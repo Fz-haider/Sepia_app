@@ -1,27 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:sepia_app/custom_widget.dart';
 
-class page_view extends StatelessWidget {
-  const page_view({super.key});
+class page_view extends StatefulWidget {
+  page_view({super.key});
+
+  @override
+  State<page_view> createState() => _page_viewState();
+}
+
+class _page_viewState extends State<page_view> {
+  PageController _pageController = PageController(initialPage: 0);
+  int pagechanger = 0;
+  List image = [
+    "assets/images/welcome-1.png",
+    "assets/images/welcome-2.png",
+    "assets/images/welcome-1.png",
+  ];
+  _onChange(value) {
+    setState(() {
+      pagechanger = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          color: Colors.grey[300],
-          width: double.infinity,
-          height: double.infinity,
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          child: Container(
-            child: Column(
-              children: [
-                Image.asset('assets/images/welcome-1.jpg'),
-                SizedBox(height: 20),
-                Text('You will be aware of your child with us'),
-              ],
-            ),
-          ),
-        ),
+        body: PageView.builder(
+            controller: _pageController,
+            onPageChanged: _onChange,
+            itemCount: image.length,
+            itemBuilder: (context, index) {
+              return FractionallySizedBox(
+                widthFactor: 0.8,
+                heightFactor: 0.8,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset(image[index]),
+                    Text('Be aware with your child with us'),
+                    customIconButton(
+                      Icons.arrow_circle_right_rounded,
+                      "Next",
+                      () {
+                        _pageController.nextPage(
+                          duration: Duration(milliseconds: 1000),
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                      paddingHorizontal: 40,
+                      paddingVertical: 10,
+                    ),
+                  ],
+                ),
+              );
+            }),
       ),
     );
   }

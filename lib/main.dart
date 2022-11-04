@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const page_view(),
+        home: page_view(),
         routes: {
           "start_page": (context) => const startpage(),
           "parent": (context) => const parent_id_submit(),
