@@ -1,17 +1,17 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:sepia_app/parent_Pages/home_page.dart';
-import 'package:sepia_app/parent_Pages/profile_page.dart';
-import 'package:sepia_app/parent_Pages/settings_page.dart';
+import 'package:sepia_app/teacher_Pages/home_page.dart';
+import 'package:sepia_app/teacher_Pages/profile_page.dart';
+import 'package:sepia_app/teacher_Pages/settings_page.dart';
 
-class parent_home_page extends StatefulWidget {
-  const parent_home_page({super.key});
+class teacher_home_page extends StatefulWidget {
+  const teacher_home_page({super.key});
 
   @override
-  State<parent_home_page> createState() => _parent_home_pageState();
+  State<teacher_home_page> createState() => _teacher_home_pageState();
 }
 
-class _parent_home_pageState extends State<parent_home_page> {
+class _teacher_home_pageState extends State<teacher_home_page> {
   int _currentIndex = 1;
   List<Widget> _tabs = [
     settings_page(),
@@ -30,7 +30,7 @@ class _parent_home_pageState extends State<parent_home_page> {
             IconButton(
               icon: Icon(Icons.notifications),
               onPressed: () {
-                Navigator.of(context).pushNamed("parent_notification");
+                Navigator.of(context).pushNamed("teacher_notification");
               },
             ),
           ],

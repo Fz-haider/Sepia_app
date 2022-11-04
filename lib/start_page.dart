@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sepia_app/custom_widget.dart';
 
-class StartPage extends StatelessWidget {
-  const StartPage({super.key});
+class startpage extends StatelessWidget {
+  const startpage({super.key});
 
   @override
   Widget build(BuildContext context) {
