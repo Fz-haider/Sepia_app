@@ -14,7 +14,12 @@ class _page_viewState extends State<page_view> {
   List image = [
     "assets/images/welcome-1.png",
     "assets/images/welcome-2.png",
-    "assets/images/welcome-1.png",
+    "assets/images/welcome-3.png",
+  ];
+  List text = [
+    "Rest assured that your child is safe with us",
+    "Contact with teachers easily",
+    "Teachers posted every lecture",
   ];
   _onChange(value) {
     setState(() {
@@ -38,7 +43,7 @@ class _page_viewState extends State<page_view> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Image.asset(image[index]),
-                    Text('Be aware with your child with us'),
+                    Text(text[index]),
                     customIconButton(
                       Icons.arrow_circle_right_rounded,
                       "Next",
