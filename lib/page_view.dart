@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sepia_app/custom_widget.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class page_view extends StatefulWidget {
   page_view({super.key});
@@ -42,6 +43,14 @@ class _page_viewState extends State<page_view> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    SmoothPageIndicator(
+                        controller: _pageController, // PageController
+                        count: 3,
+                        effect: ExpandingDotsEffect(
+                          activeDotColor: Colors.indigo,
+                          dotColor: Colors.grey.shade300,
+                        ), // your preferred effect
+                        onDotClicked: (index) {}),
                     Image.asset(image[index]),
                     Text(text[index]),
                     customIconButton(
