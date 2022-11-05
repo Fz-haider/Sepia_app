@@ -7,9 +7,10 @@ import 'package:sepia_app/teacher_Pages/teacher_id_submit.dart';
 import 'package:sepia_app/parent_Pages/parent_home_page.dart';
 import 'package:sepia_app/teacher_Pages/teacher_home_page.dart';
 import 'package:sepia_app/teacher_Pages/teacher_notification.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
