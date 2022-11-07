@@ -9,7 +9,7 @@ import 'package:sepia_app/teacher_Pages/teacher_home_page.dart';
 import 'package:sepia_app/teacher_Pages/teacher_notification.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
