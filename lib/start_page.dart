@@ -1,25 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sepia_app/custom_widget.dart';
 
-class startpage extends StatelessWidget {
-  const startpage({super.key});
+class start_page extends StatelessWidget {
+  const start_page({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        extendBodyBehindAppBar: true,
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: RadialGradient(colors: [
-                Color.fromRGBO(146, 97, 52, 0.3),
-                Color.fromRGBO(146, 97, 52, 0.7),
-              ], radius: 3),
-            ),
-          ),
-          elevation: 0,
           centerTitle: true,
           title: const Text(
             'Sepia',
@@ -33,66 +22,45 @@ class startpage extends StatelessWidget {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromRGBO(146, 97, 52, 0.3),
-                Color.fromRGBO(146, 97, 52, 0.9),
-              ],
-              begin: Alignment.bottomLeft,
-              end: Alignment.topRight,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: RadialGradient(colors: [
-                        Color.fromRGBO(146, 97, 52, 1),
-                        Color.fromRGBO(146, 97, 52, 0.2),
-                      ], radius: 5),
-                    ),
-                    child: customImageButton(
+          child: FractionallySizedBox(
+            widthFactor: 0.8,
+            heightFactor: 0.9,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Image(
+                    image: AssetImage('assets/images/welcome-1.png'),
+                    fit: BoxFit.cover),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    customImageButton(
                       "assets/images/family.png",
                       'Parent',
                       width: 30,
-                      letterSpacing: 2,
-                      paddingVertical: 22,
-                      paddingHorizontal: 28,
+                      paddingVertical: 18,
+                      paddingHorizontal: 18,
                       () {
                         Navigator.of(context).pushNamed("parent");
                       },
                     ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: RadialGradient(colors: [
-                        Color.fromRGBO(146, 97, 52, 1),
-                        Color.fromRGBO(146, 97, 52, 0.2),
-                      ], radius: 5),
+                    const SizedBox(
+                      width: 20,
                     ),
-                    child: customImageButton(
+                    customImageButton(
                       "assets/images/teacher.png",
                       'Teacher',
                       width: 30,
-                      letterSpacing: 2,
-                      paddingVertical: 22,
-                      paddingHorizontal: 28,
+                      paddingVertical: 18,
+                      paddingHorizontal: 18,
                       () {
                         Navigator.of(context).pushNamed("teacher");
                       },
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

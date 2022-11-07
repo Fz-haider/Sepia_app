@@ -30,10 +30,13 @@ class _teacher_notificationState extends State<teacher_notification> {
               ListTile(
                 trailing: InkWell(
                   onTap: () {},
-                  child: Text("Mark all as read",
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                      )),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Mark all as read",
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                        )),
+                  ),
                 ),
               ),
               SwitchListTile(
