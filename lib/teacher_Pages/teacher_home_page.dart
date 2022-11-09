@@ -38,25 +38,29 @@ class _teacher_home_pageState extends State<teacher_home_page> {
         body: _tabs.elementAt(_currentIndex),
         bottomNavigationBar: ConvexAppBar(
           initialActiveIndex: 1,
-          style: TabStyle.reactCircle,
-          backgroundColor: Color.fromARGB(255, 64, 76, 180),
+          style: TabStyle.textIn,
+          backgroundColor: Color.fromRGBO(115, 67, 13, 1),
+          color: Colors.white,
           items: [
             TabItem(
               title: "Settings",
               icon: Icon(
                 Icons.settings,
+                color: Colors.white,
               ),
             ),
             TabItem(
               title: "Home",
               icon: Icon(
                 Icons.home,
+                color: Colors.white,
               ),
             ),
             TabItem(
               title: "Profile",
               icon: Icon(
                 Icons.person,
+                color: Colors.white,
               ),
             ),
           ],

@@ -30,8 +30,7 @@ ElevatedButton customImageButton(
 }) {
   return ElevatedButton.icon(
     style: ElevatedButton.styleFrom(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      backgroundColor: Colors.indigo.shade400,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: elevation,
       padding: EdgeInsets.symmetric(
         vertical: paddingVertical,
@@ -47,7 +46,7 @@ ElevatedButton customImageButton(
     label: Text(
       label,
       style: TextStyle(
-        fontSize: 22,
+        fontSize: 16,
         letterSpacing: letterSpacing,
       ),
     ),

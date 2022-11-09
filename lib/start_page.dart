@@ -12,11 +12,6 @@ class start_page extends StatelessWidget {
           centerTitle: true,
           title: const Text(
             'Sepia',
-            style: TextStyle(
-              color: Colors.white,
-              letterSpacing: 7,
-              fontSize: 27,
-            ),
           ),
         ),
         body: Container(
