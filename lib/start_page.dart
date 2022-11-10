@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sepia_app/custom_widget.dart';
 import 'package:sepia_app/images.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class start_page extends StatelessWidget {
   const start_page({super.key});
@@ -39,7 +40,7 @@ class start_page extends StatelessWidget {
                   children: [
                     customImageButton(
                       Images.FAMILY,
-                      'Parent',
+                      AppLocalizations.of(context)!.parent,
                       width: 30,
                       paddingVertical: 18,
                       paddingHorizontal: 18,
@@ -52,7 +53,7 @@ class start_page extends StatelessWidget {
                     ),
                     customImageButton(
                       Images.TEACHER,
-                      'Teacher',
+                      AppLocalizations.of(context)!.teacher,
                       width: 30,
                       paddingVertical: 18,
                       paddingHorizontal: 18,

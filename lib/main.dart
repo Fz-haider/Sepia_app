@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
         //choosing the custom color as the primary swatch
         theme: ThemeData(
           primarySwatch: sepiaColor,
+          fontFamily: 'Nrt',
         ),
         title: 'Sepia',
         routes: {

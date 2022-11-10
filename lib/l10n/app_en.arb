@@ -1,9 +1,9 @@
 {
-    "helloWorld": "Hello World!",
-    "@helloWorld": {
-      "description": "The conventional newborn programmer greeting"
-    },
     "introduction_1": "Rest assured that your child is safe with us",
     "introduction_2": "Contact with teachers easily",
-    "introduction_3": "Teachers will post every lecture"
+    "introduction_3": "Teachers will post every lecture",
+    "next": "Next",
+    "done": "Done",
+    "parent": "Parent",
+    "teacher": "Teacher"
 }

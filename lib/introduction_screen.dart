@@ -3,6 +3,7 @@ import 'package:sepia_app/custom_widget.dart';
 import 'package:sepia_app/images.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sepia_app/constants.dart';
 
 class IntroductionScreen extends StatelessWidget {
   final PageController _pageController = PageController(initialPage: 0);
@@ -20,10 +21,15 @@ class IntroductionScreen extends StatelessWidget {
       AppLocalizations.of(context)!.introduction_2,
       AppLocalizations.of(context)!.introduction_3,
     ];
+    //sliding animation duration
+    var animationDuration = 500; // in millis
+    //getting the localization to use it later
+    var isEnglish = AppLocalizations.of(context)!.localeName == 'en';
 
     return SafeArea(
       child: Scaffold(
         body: PageView.builder(
+            reverse: !isEnglish,
             controller: _pageController,
             itemCount: images.length,
             itemBuilder: (context, index) {
@@ -36,13 +42,15 @@ class IntroductionScreen extends StatelessWidget {
                     SmoothPageIndicator(
                         controller: _pageController,
                         count: 3,
+                        textDirection:
+                            isEnglish ? TextDirection.ltr : TextDirection.rtl,
                         effect: ExpandingDotsEffect(
                           activeDotColor: Colors.brown,
                           dotColor: Colors.grey.shade300,
                         ),
                         onDotClicked: (index) {
                           _pageController.nextPage(
-                            duration: Duration(milliseconds: 500),
+                            duration: Duration(milliseconds: animationDuration),
                             curve: Curves.easeInOut,
                           );
                         }),
@@ -54,20 +62,23 @@ class IntroductionScreen extends StatelessWidget {
                       texts[index],
                       style: TextStyle(
                         fontSize: 14,
-                        fontFamily: 'Nrt',
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 10),
                     customIconButton(
                       (index < 2)
-                          ? Icons.arrow_circle_right_rounded
+                          ? (isEnglish
+                              ? Icons.arrow_circle_right_rounded
+                              : Icons.arrow_circle_left_rounded)
                           : Icons.done,
-                      (index < 2) ? "Next" : "Done",
+                      (index < 2)
+                          ? AppLocalizations.of(context)!.next
+                          : AppLocalizations.of(context)!.done,
                       () {
                         if (index < 2) {
                           _pageController.nextPage(
-                            duration: Duration(milliseconds: 500),
+                            duration: Duration(milliseconds: animationDuration),
                             curve: Curves.easeInOut,
                           );
                         } else {
