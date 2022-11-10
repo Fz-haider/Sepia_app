@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sepia_app/custom_widget.dart';
+import 'package:sepia_app/images.dart';
 
 class start_page extends StatelessWidget {
   const start_page({super.key});
@@ -19,18 +20,25 @@ class start_page extends StatelessWidget {
           width: double.infinity,
           child: FractionallySizedBox(
             widthFactor: 0.8,
-            heightFactor: 0.9,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Image(
-                    image: AssetImage('assets/images/welcome-1.png'),
+                    image: AssetImage(Images.START_PAGE_BACKGROUND),
                     fit: BoxFit.cover),
+                /*Text(
+                  'Are you parent of a student?\n or you are a teacher?',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 20,
+                      height: 1.5,
+                      color: Color.fromRGBO(115, 43, 57, 1)),
+                ),*/
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     customImageButton(
-                      "assets/images/family.png",
+                      Images.FAMILY,
                       'Parent',
                       width: 30,
                       paddingVertical: 18,
@@ -43,7 +51,7 @@ class start_page extends StatelessWidget {
                       width: 20,
                     ),
                     customImageButton(
-                      "assets/images/teacher.png",
+                      Images.TEACHER,
                       'Teacher',
                       width: 30,
                       paddingVertical: 18,

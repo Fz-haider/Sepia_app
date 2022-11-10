@@ -2,29 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:sepia_app/custom_widget.dart';
 import 'package:sepia_app/images.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class introduction_screen extends StatelessWidget {
-  late PageController _pageController;
-  late List<Image> images;
-  late List<String> texts;
+class IntroductionScreen extends StatelessWidget {
+  final PageController _pageController = PageController(initialPage: 0);
 
-  introduction_screen({super.key}) {
+  @override
+  Widget build(BuildContext context) {
     //initialize fields
-    _pageController = PageController(initialPage: 0);
-    images = [
+    var images = [
       Image(image: AssetImage(Images.WELCOME_1)),
       Image(image: AssetImage(Images.WELCOME_2)),
       Image(image: AssetImage(Images.WELCOME_3)),
     ];
-    texts = [
-      "Rest assured that your child is safe with us",
-      "Contact with teachers easily",
-      "Teachers posted every lecture",
+    var texts = [
+      AppLocalizations.of(context)!.introduction_1,
+      AppLocalizations.of(context)!.introduction_2,
+      AppLocalizations.of(context)!.introduction_3,
     ];
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: PageView.builder(
@@ -46,17 +42,28 @@ class introduction_screen extends StatelessWidget {
                         ),
                         onDotClicked: (index) {
                           _pageController.nextPage(
-                            duration: Duration(milliseconds: 1000),
+                            duration: Duration(milliseconds: 500),
                             curve: Curves.easeInOut,
                           );
                         }),
-                    images[index],
-                    Text(texts[index]),
+                    Image(
+                      image: images[index].image,
+                      height: 300,
+                    ),
+                    Text(
+                      texts[index],
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Nrt',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
                     customIconButton(
-                      (index == 0 || index == 1)
+                      (index < 2)
                           ? Icons.arrow_circle_right_rounded
                           : Icons.done,
-                      (index == 0 || index == 1) ? "Next" : "Done",
+                      (index < 2) ? "Next" : "Done",
                       () {
                         if (index < 2) {
                           _pageController.nextPage(

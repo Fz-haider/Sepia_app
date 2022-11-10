@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_kurdish_localization/flutter_kurdish_localization.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:sepia_app/images.dart';
 import 'package:sepia_app/introduction_screen.dart';
 import 'package:sepia_app/start_page.dart';
@@ -8,6 +10,7 @@ import 'package:sepia_app/teacher_Pages/teacher_id_submit.dart';
 import 'package:sepia_app/parent_Pages/parent_home_page.dart';
 import 'package:sepia_app/teacher_Pages/teacher_home_page.dart';
 import 'package:sepia_app/teacher_Pages/teacher_notification.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -38,11 +41,24 @@ class MyApp extends StatelessWidget {
 
     //make the application ready to display
     return MaterialApp(
+        //adding localization future
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          KurdishMaterialLocalizations.delegate,
+          KurdishWidgetLocalizations.delegate,
+        ],
+        supportedLocales: [Locale('en'), Locale('ku')],
+        locale: Locale('ku'),
         debugShowCheckedModeBanner: false,
-        home: introduction_screen(),
+        home: IntroductionScreen(),
+        //choosing the custom color as the primary swatch
         theme: ThemeData(
           primarySwatch: sepiaColor,
         ),
+        title: 'Sepia',
         routes: {
           "start_page": (context) => const start_page(),
           "parent": (context) => const parent_id_submit(),
