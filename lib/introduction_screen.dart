@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sepia_app/custom_widget.dart';
 import 'package:sepia_app/images.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sepia_app/constants.dart';
