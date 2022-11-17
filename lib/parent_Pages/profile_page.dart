@@ -25,7 +25,7 @@ class _profile_pageState extends State<profile_page> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: EdgeInsets.only(top: 50),
                         child: CircleAvatar(
                           backgroundColor: Colors.black,
                           radius: 40,
@@ -75,24 +75,33 @@ class _profile_pageState extends State<profile_page> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.call,
-                            size: 30,
+                          Column(
+                            children: [
+                              Icon(
+                                Icons.call,
+                                size: 30,
+                              ),
+                              SizedBox(
+                                height: 60,
+                              ),
+                              Icon(
+                                Icons.location_on,
+                                size: 30,
+                              ),
+                            ],
                           ),
-                          Text("07501716552"),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 70,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.location_on,
-                            size: 30,
+                          SizedBox(
+                            width: 10,
                           ),
-                          Text("Sulaymaniyah, KaniGoma"),
+                          Column(
+                            children: [
+                              Text("0750 171 6552"),
+                              SizedBox(
+                                height: 70,
+                              ),
+                              Text("Sulaymaniyah, KaniGoma"),
+                            ],
+                          ),
                         ],
                       ),
                     ],

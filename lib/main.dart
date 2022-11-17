@@ -12,6 +12,7 @@ import 'package:sepia_app/teacher_Pages/teacher_home_page.dart';
 import 'package:sepia_app/teacher_Pages/teacher_notification.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sepia_app/constants.dart' as consts;
+import 'package:sepia_app/teacher_Pages/teacher_post.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -96,6 +97,7 @@ class SepiaApp extends StatelessWidget {
           "start_page": (context) => StartPage(),
           "parent": (context) => const parent_id_submit(),
           "teacher": (context) => const teacher_id_submit(),
+          "teacher_post": (context) => const teacher_post(),
           "parent_home_page": (context) => const parent_home_page(),
           "teacher_home_page": (context) => const teacher_home_page(),
           "teacher_notification": (context) => const teacher_notification(),

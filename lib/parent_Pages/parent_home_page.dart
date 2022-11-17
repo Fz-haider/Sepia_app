@@ -18,6 +18,7 @@ class _parent_home_pageState extends State<parent_home_page> {
     home_page(),
     profile_page(),
   ];
+  List<String> title = ["Settings", "Home", "Profile"];
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,9 @@ class _parent_home_pageState extends State<parent_home_page> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Home'),
+          title: Text(
+            title[_currentIndex],
+          ),
           actions: [
             IconButton(
               icon: Icon(Icons.notifications),

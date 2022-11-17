@@ -1,6 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:sepia_app/teacher_Pages/home_page.dart';
+import 'package:sepia_app/teacher_Pages/classes_page.dart';
 import 'package:sepia_app/teacher_Pages/profile_page.dart';
 import 'package:sepia_app/teacher_Pages/settings_page.dart';
 
@@ -15,17 +15,17 @@ class _teacher_home_pageState extends State<teacher_home_page> {
   int _currentIndex = 1;
   List<Widget> _tabs = [
     settings_page(),
-    home_page(),
+    classes_page(),
     profile_page(),
   ];
-
+  List<String> title = ["Settings", "Home", "Profile"];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Home'),
+          title: Text(title[_currentIndex]),
           actions: [
             IconButton(
               icon: Icon(Icons.notifications),
@@ -40,7 +40,6 @@ class _teacher_home_pageState extends State<teacher_home_page> {
           initialActiveIndex: 1,
           style: TabStyle.textIn,
           backgroundColor: Color.fromRGBO(115, 67, 13, 1),
-          color: Colors.white,
           items: [
             TabItem(
               title: "Settings",

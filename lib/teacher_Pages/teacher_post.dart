@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
 
-class home_page extends StatefulWidget {
-  const home_page({super.key});
+class teacher_post extends StatefulWidget {
+  const teacher_post({super.key});
 
   @override
-  State<home_page> createState() => _home_pageState();
+  State<teacher_post> createState() => _teacher_postState();
 }
 
-class _home_pageState extends State<home_page> {
+class _teacher_postState extends State<teacher_post> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Post'),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.notifications),
+              onPressed: () {
+                Navigator.of(context).pushNamed("teacher_notification");
+              },
+            ),
+          ],
+        ),
         backgroundColor: Colors.deepPurple[100],
         body: ListView.builder(
           scrollDirection: Axis.vertical,
