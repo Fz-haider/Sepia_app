@@ -39,9 +39,9 @@ class StartPage extends StatelessWidget {
                     customImageButton(
                       Images.FAMILY,
                       AppLocalizations.of(context)!.parent,
-                      width: 30,
-                      paddingVertical: 18,
-                      paddingHorizontal: 18,
+                      width: 28,
+                      paddingVertical: 20,
+                      paddingHorizontal: 26,
                       () {
                         Navigator.of(context).pushNamed("parent");
                       },
