@@ -48,7 +48,7 @@ class _ClassesPageState extends State<ClassesPage> {
                           EdgeInsets.symmetric(horizontal: 50, vertical: 25),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed("teacher_post");
+                      Navigator.of(context).pushNamed("view_post");
                     },
                     child: Text("${_className[index]}"),
                   ),

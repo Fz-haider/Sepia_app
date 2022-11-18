@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ViewPost extends StatefulWidget {
+  const ViewPost({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ViewPost> createState() => _ViewPostState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ViewPostState extends State<ViewPost> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Post'),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.notifications),
+              onPressed: () {
+                Navigator.of(context).pushNamed("parent_notification");
+              },
+            ),
+          ],
+        ),
         backgroundColor: Colors.deepPurple[100],
         body: ListView.builder(
           scrollDirection: Axis.vertical,

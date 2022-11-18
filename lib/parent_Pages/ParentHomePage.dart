@@ -1,6 +1,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:sepia_app/parent_Pages/HomePage.dart';
+import 'package:sepia_app/parent_Pages/ClassesPage.dart';
+
 import 'package:sepia_app/parent_Pages/ProfilePage.dart';
 import 'package:sepia_app/parent_Pages/SettingsPage.dart';
 
@@ -15,7 +16,7 @@ class _ParentHomePageState extends State<ParentHomePage> {
   int _currentIndex = 1;
   List<Widget> _tabs = [
     SettingsPage(),
-    HomePage(),
+    ClassesPage(),
     ProfilePage(),
   ];
   List<String> title = ["Settings", "Home", "Profile"];

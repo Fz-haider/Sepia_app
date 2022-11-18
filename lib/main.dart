@@ -6,6 +6,7 @@ import 'package:sepia_app/IntroductionScreen.dart';
 import 'package:sepia_app/StartPage.dart';
 import 'package:sepia_app/parent_Pages/ParentIdSubmit.dart';
 import 'package:sepia_app/parent_Pages/ParentNotification.dart';
+import 'package:sepia_app/parent_Pages/ViewPost.dart';
 import 'package:sepia_app/teacher_Pages/TeacherIdSubmit.dart';
 import 'package:sepia_app/parent_Pages/ParentHomePage.dart';
 import 'package:sepia_app/teacher_Pages/TeacherHomePage.dart';
@@ -98,6 +99,7 @@ class SepiaApp extends StatelessWidget {
           "parent": (context) => const ParentIdSubmit(),
           "teacher": (context) => const TeacherIdSubmit(),
           "teacher_post": (context) => const TeacherPost(),
+          "view_post": (context) => const ViewPost(),
           "parent_home_page": (context) => const ParentHomePage(),
           "teacher_home_page": (context) => const TeacherHomePage(),
           "teacher_notification": (context) => const TeacherNotification(),
