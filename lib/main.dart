@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kurdish_localization/flutter_kurdish_localization.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:sepia_app/images.dart';
-import 'package:sepia_app/introduction_screen.dart';
-import 'package:sepia_app/start_page.dart';
-import 'package:sepia_app/parent_Pages/parent_id_submit.dart';
-import 'package:sepia_app/parent_Pages/parent_notification.dart';
-import 'package:sepia_app/teacher_Pages/teacher_id_submit.dart';
-import 'package:sepia_app/parent_Pages/parent_home_page.dart';
-import 'package:sepia_app/teacher_Pages/teacher_home_page.dart';
-import 'package:sepia_app/teacher_Pages/teacher_notification.dart';
+import 'package:sepia_app/Images.dart';
+import 'package:sepia_app/IntroductionScreen.dart';
+import 'package:sepia_app/StartPage.dart';
+import 'package:sepia_app/parent_Pages/ParentIdSubmit.dart';
+import 'package:sepia_app/parent_Pages/ParentNotification.dart';
+import 'package:sepia_app/teacher_Pages/TeacherIdSubmit.dart';
+import 'package:sepia_app/parent_Pages/ParentHomePage.dart';
+import 'package:sepia_app/teacher_Pages/TeacherHomePage.dart';
+import 'package:sepia_app/teacher_Pages/TeacherNotification.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sepia_app/constants.dart' as consts;
-import 'package:sepia_app/teacher_Pages/teacher_post.dart';
+import 'package:sepia_app/Constants.dart' as consts;
+import 'package:sepia_app/teacher_Pages/TeacherPost.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -95,13 +95,13 @@ class SepiaApp extends StatelessWidget {
         title: 'Sepia',
         routes: {
           "start_page": (context) => StartPage(),
-          "parent": (context) => const parent_id_submit(),
-          "teacher": (context) => const teacher_id_submit(),
-          "teacher_post": (context) => const teacher_post(),
-          "parent_home_page": (context) => const parent_home_page(),
-          "teacher_home_page": (context) => const teacher_home_page(),
-          "teacher_notification": (context) => const teacher_notification(),
-          "parent_notification": (context) => const parent_notification(),
+          "parent": (context) => const ParentIdSubmit(),
+          "teacher": (context) => const TeacherIdSubmit(),
+          "teacher_post": (context) => const TeacherPost(),
+          "parent_home_page": (context) => const ParentHomePage(),
+          "teacher_home_page": (context) => const TeacherHomePage(),
+          "teacher_notification": (context) => const TeacherNotification(),
+          "parent_notification": (context) => const ParentNotification(),
         });
   }
 }

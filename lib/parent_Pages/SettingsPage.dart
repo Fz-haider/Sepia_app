@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class settings_page extends StatefulWidget {
-  const settings_page({super.key});
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
 
   @override
-  State<settings_page> createState() => _settings_pageState();
+  State<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _settings_pageState extends State<settings_page> {
+class _SettingsPageState extends State<SettingsPage> {
   bool darkmode = false;
   String selectedCountry = "English";
   @override

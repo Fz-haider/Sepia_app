@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:sepia_app/custom_widget.dart';
-import 'package:sepia_app/main.dart';
+import 'package:sepia_app/CustomWidget.dart';
+import 'package:sepia_app/Main.dart';
 
-class parent_id_submit extends StatelessWidget {
-  const parent_id_submit({super.key});
-
+class TeacherIdSubmit extends StatelessWidget {
+  const TeacherIdSubmit({super.key});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Parent"),
+          title: Text("Teacher"),
           centerTitle: true,
         ),
         body: Column(
@@ -33,7 +32,7 @@ class parent_id_submit extends StatelessWidget {
               Icons.arrow_circle_right_outlined,
               "Submit",
               () {
-                Navigator.of(context).pushReplacementNamed("parent_home_page");
+                Navigator.of(context).pushReplacementNamed("teacher_home_page");
               },
               paddingVertical: 15,
               paddingHorizontal: 15,

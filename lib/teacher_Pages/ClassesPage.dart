@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:sepia_app/teacher_Pages/teacher_post.dart';
+import 'package:sepia_app/teacher_Pages/TeacherPost.dart';
 
-class classes_page extends StatefulWidget {
-  const classes_page({super.key});
+class ClassesPage extends StatefulWidget {
+  const ClassesPage({super.key});
 
   @override
-  State<classes_page> createState() => _classes_pageState();
+  State<ClassesPage> createState() => _ClassesPageState();
 }
 
-class _classes_pageState extends State<classes_page> {
+class _ClassesPageState extends State<ClassesPage> {
   List _class = [
-    teacher_post(),
+    TeacherPost(),
   ];
   List _className = [
     "Kurdish",

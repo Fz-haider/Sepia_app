@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class teacher_notification extends StatefulWidget {
-  const teacher_notification({super.key});
+class TeacherNotification extends StatefulWidget {
+  const TeacherNotification({super.key});
 
   @override
-  State<teacher_notification> createState() => _teacher_notificationState();
+  State<TeacherNotification> createState() => _TeacherNotificationState();
 }
 
-class _teacher_notificationState extends State<teacher_notification> {
+class _TeacherNotificationState extends State<TeacherNotification> {
   bool notify = false;
 
   @override

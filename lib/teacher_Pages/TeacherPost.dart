@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class teacher_post extends StatefulWidget {
-  const teacher_post({super.key});
+class TeacherPost extends StatefulWidget {
+  const TeacherPost({super.key});
 
   @override
-  State<teacher_post> createState() => _teacher_postState();
+  State<TeacherPost> createState() => _TeacherPostState();
 }
 
-class _teacher_postState extends State<teacher_post> {
+class _TeacherPostState extends State<TeacherPost> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

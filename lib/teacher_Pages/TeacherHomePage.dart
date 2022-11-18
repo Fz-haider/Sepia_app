@@ -1,39 +1,36 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:sepia_app/parent_Pages/home_page.dart';
-import 'package:sepia_app/parent_Pages/profile_page.dart';
-import 'package:sepia_app/parent_Pages/settings_page.dart';
+import 'package:sepia_app/teacher_Pages/ClassesPage.dart';
+import 'package:sepia_app/teacher_Pages/ProfilePage.dart';
+import 'package:sepia_app/teacher_Pages/SettingsPage.dart';
 
-class parent_home_page extends StatefulWidget {
-  const parent_home_page({super.key});
+class TeacherHomePage extends StatefulWidget {
+  const TeacherHomePage({super.key});
 
   @override
-  State<parent_home_page> createState() => _parent_home_pageState();
+  State<TeacherHomePage> createState() => _TeacherHomePageState();
 }
 
-class _parent_home_pageState extends State<parent_home_page> {
+class _TeacherHomePageState extends State<TeacherHomePage> {
   int _currentIndex = 1;
   List<Widget> _tabs = [
-    settings_page(),
-    home_page(),
-    profile_page(),
+    SettingsPage(),
+    ClassesPage(),
+    ProfilePage(),
   ];
   List<String> title = ["Settings", "Home", "Profile"];
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
-            title[_currentIndex],
-          ),
+          title: Text(title[_currentIndex]),
           actions: [
             IconButton(
               icon: Icon(Icons.notifications),
               onPressed: () {
-                Navigator.of(context).pushNamed("parent_notification");
+                Navigator.of(context).pushNamed("teacher_notification");
               },
             ),
           ],
@@ -43,7 +40,6 @@ class _parent_home_pageState extends State<parent_home_page> {
           initialActiveIndex: 1,
           style: TabStyle.textIn,
           backgroundColor: Color.fromRGBO(115, 67, 13, 1),
-          color: Colors.white,
           items: [
             TabItem(
               title: "Settings",
