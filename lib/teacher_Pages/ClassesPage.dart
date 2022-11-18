@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sepia_app/teacher_Pages/TeacherPost.dart';
 
 class ClassesPage extends StatefulWidget {
   const ClassesPage({super.key});
@@ -9,9 +8,6 @@ class ClassesPage extends StatefulWidget {
 }
 
 class _ClassesPageState extends State<ClassesPage> {
-  List _class = [
-    TeacherPost(),
-  ];
   List _className = [
     "Kurdish",
     "English",
