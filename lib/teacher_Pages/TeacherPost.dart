@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sepia_app/Constants.dart';
 
 class TeacherPost extends StatefulWidget {
   const TeacherPost({super.key});
@@ -82,6 +83,17 @@ class _TeacherPostState extends State<TeacherPost> {
               ),
             );
           },
+        ),
+        floatingActionButton: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: Color.fromRGBO(115, 67, 13, .9),
+          ),
+          child: IconButton(
+            color: Colors.white,
+            icon: Icon(Icons.add),
+            onPressed: () {},
+          ),
         ),
       ),
     );
