@@ -28,7 +28,12 @@ class _ClassesPageState extends State<ClassesPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[200],
-        body: ListView.builder(
+        body: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 2,
+            mainAxisSpacing: 2,
+          ),
           itemCount: _className.length,
           itemBuilder: (context, index) {
             return Container(
