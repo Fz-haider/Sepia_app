@@ -1,8 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:sepia_app/CustomWidget.dart';
+import 'package:sepia_app/DbConnection.dart';
+import 'package:sepia_app/constants.dart' as consts;
+import 'package:sepia_app/models/student.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ParentIdSubmit extends StatelessWidget {
-  const ParentIdSubmit({super.key});
+class ParentIdSubmit extends StatefulWidget {
+  ParentIdSubmit({super.key});
+
+  @override
+  State<ParentIdSubmit> createState() => _ParentIdSubmit();
+}
+
+class _ParentIdSubmit extends State<ParentIdSubmit> {
+  late Widget loginInfo;
+  late TextEditingController txt_userName, txt_password;
+
+  _ParentIdSubmit() {
+    //make a widget for displaying login info
+    loginInfo = SizedBox();
+    txt_userName = TextEditingController();
+    txt_password = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,27 +39,96 @@ class ParentIdSubmit extends StatelessWidget {
               child: Container(
                 width: 250,
                 child: customField(
-                  "Enter Your ID",
+                  "User name",
+                  txt_userName,
                   () {},
-                  maxLength: 6,
                 ),
               ),
             ),
             const SizedBox(
               height: 20,
             ),
+            Center(
+              child: Container(
+                width: 250,
+                child: customField(
+                  "Password",
+                  txt_password,
+                  () {},
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
             customIconButton(
               Icons.arrow_circle_right_outlined,
               "Submit",
               () {
-                Navigator.of(context).pushReplacementNamed("parent_home_page");
+                setState(() {
+                  loginInfo =
+                      checkStudentInfo(txt_userName.text, txt_password.text);
+                });
               },
               paddingVertical: 15,
               paddingHorizontal: 15,
-            )
+            ),
+            SizedBox(height: 50),
+            loginInfo
           ],
         ),
       ),
     );
   }
+}
+
+FutureBuilder<dynamic> checkStudentInfo(String userName, String password) {
+  return FutureBuilder<dynamic>(
+    future: getStudent(userName, password),
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        Pair result = snapshot.data!;
+        if (result.a == 2) {
+          //after the build process do these things
+          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            //this means both of creds are right
+            Student student = Student.fromJson(result.b);
+
+            //do some changes in shared preferences
+            SharedPreferences.getInstance().then((value) {
+              //set the isParent variable to true in preferences
+              value.setBool(consts.prefs_isParent, true);
+              //set the userID variable in shared preferences
+              value.setInt(consts.prefs_userID, student.ID);
+            });
+
+            //navigate to the parent home page
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil("parent_home_page", (e) => false);
+          });
+          //return a text with success message
+          return Text(
+            'Successfully signed in.',
+            style: TextStyle(color: Colors.green),
+          );
+        } else if (result.a == 1) {
+          //this means user name is right
+          return Text(
+            'Wrong password!',
+            style: TextStyle(color: consts.redColor),
+          );
+        } else {
+          //this means user name is wrong
+          return Text(
+            'Wrong user name!',
+            style: TextStyle(color: consts.redColor),
+          );
+        }
+      } else if (snapshot.hasError) {
+        return Text('${snapshot.error}');
+      }
+
+      return const CircularProgressIndicator();
+    },
+  );
 }

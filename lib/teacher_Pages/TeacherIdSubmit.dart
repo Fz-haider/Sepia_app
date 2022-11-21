@@ -18,11 +18,11 @@ class TeacherIdSubmit extends StatelessWidget {
             Center(
               child: Container(
                 width: 250,
-                child: customField(
+                /*child: customField(
                   "Enter Your ID",
                   () {},
                   maxLength: 6,
-                ),
+                ),*/
               ),
             ),
             const SizedBox(

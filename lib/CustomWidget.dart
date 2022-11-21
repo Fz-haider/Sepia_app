@@ -90,19 +90,20 @@ ElevatedButton customIconButton(
 }
 
 // Custom TextField
-
 TextFormField customField(
   String label,
+  TextEditingController controller,
   void Function() onTap, {
-  int maxLength = 6,
+  int maxLength = 0,
   bool obscureText = false,
 }) {
   return TextFormField(
       onTap: onTap,
+      controller: controller,
       decoration: InputDecoration(
         label: Text(label),
       ),
-      maxLength: maxLength,
+      maxLength: maxLength == 0 ? null : maxLength,
       keyboardType: TextInputType.number,
       obscureText: obscureText,
       textAlign: TextAlign.center);

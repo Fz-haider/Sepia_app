@@ -1,53 +1,38 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:sepia_app/constants.dart';
+import 'package:sepia_app/models/student.dart';
 
-class Student {
-  final int ID;
-  final String f_name;
-
-  Student({required this.ID, required this.f_name});
-
-  factory Student.fromJson(Map<String, dynamic> json) {
-    return Student(
-      ID: int.parse(json['ID']),
-      f_name: json['f_name'],
-    );
-  }
+//a model for returning two types together like in othre languages
+class Pair<A, B> {
+  final A a;
+  final B b;
+  Pair(this.a, this.b);
 }
 
-Future<Student> getStudent(String auth) async {
+//getting a student from the database
+Future<dynamic>? getStudent(String userName, String password) async {
   final response = await http.post(
-    Uri.parse('http://192.168.16.105/sepiawebproject/index.php'),
+    Uri.parse(db_connection_addr_index),
     headers: {
       "Content-Type": "application/json",
     },
-    body: jsonEncode({'students': 'hello'}),
+    body: jsonEncode({
+      'studentCheck': {'userName': userName, 'password': password}
+    }),
     encoding: Encoding.getByName("utf-8"),
   );
 
   if (response.statusCode == 200) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
-    return Student.fromJson(jsonDecode(response.body));
+    var result = jsonDecode(response.body);
+    //states for checking the student credentials:
+    //0 - means user name does not exist in database
+    //1 - means user name is correct but password is incorrect
+    //2 - means credentials are right
+    return Pair(result['state'], result['student']);
   } else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
-    throw Exception('Failed to create album.');
+    print('Failed to connect to the database!');
+    return null;
   }
-}
-
-FutureBuilder<Student> makeStudentWidget() {
-  return FutureBuilder<Student>(
-    future: getStudent('students'),
-    builder: (context, snapshot) {
-      if (snapshot.hasData) {
-        return Text(snapshot.data!.f_name);
-      } else if (snapshot.hasError) {
-        return Text('${snapshot.error}');
-      }
-
-      return const CircularProgressIndicator();
-    },
-  );
 }

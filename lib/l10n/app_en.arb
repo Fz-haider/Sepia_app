@@ -5,5 +5,13 @@
     "next": "Next",
     "done": "Done",
     "parent": "Parent",
-    "teacher": "Teacher"
+    "teacher": "Teacher",
+    "english": "English",
+    "kurdish": "Kurdish",
+    "arabic": "Arabic",
+    "maths": "Mathematics",
+    "science": "Science",
+    "sports": "Sports",
+    "religion": "Religion",
+    "society": "Society"
 }

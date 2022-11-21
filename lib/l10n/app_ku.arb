@@ -5,5 +5,13 @@
     "next": "دواتر",
     "done": "لابردن",
     "parent": "باوان",
-    "teacher": "مامۆستا"
+    "teacher": "مامۆستا",
+    "english": "ئینگلیزی",
+    "kurdish": "کوردی",
+    "arabic": "عەرەبی",
+    "maths": "بیرکاری",
+    "science": "زانست",
+    "sports": "وەرزش",
+    "religion": "ئاین",
+    "society": "کۆمەڵایەتی"
 }

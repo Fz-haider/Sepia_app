@@ -12,7 +12,7 @@ import 'package:sepia_app/parent_Pages/ParentHomePage.dart';
 import 'package:sepia_app/teacher_Pages/TeacherHomePage.dart';
 import 'package:sepia_app/teacher_Pages/TeacherNotification.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sepia_app/Constants.dart' as consts;
+import 'package:sepia_app/constants.dart' as consts;
 import 'package:sepia_app/teacher_Pages/TeacherPost.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -36,6 +36,13 @@ void main() async {
     }
   }
 
+  //load whether user logged in or not
+  bool isUserLogged = false;
+  bool? isParent = prefs.getBool(consts.prefs_isParent);
+  if (isParent != null) {
+    isUserLogged = true;
+  }
+
   //load whether the introduction screen is shown before or not
   bool? isShown = prefs.getBool(consts.prefs_introductionScreen);
   if (isShown == null) {
@@ -44,12 +51,28 @@ void main() async {
   }
 
   //then start the app
-  runApp(SepiaApp(isIntroductionShown: isShown));
+  runApp(SepiaApp(
+      isIntroductionShown: isShown,
+      isUserLogged: isUserLogged,
+      isParent: isParent));
 }
 
 class SepiaApp extends StatelessWidget {
-  SepiaApp({super.key, required this.isIntroductionShown});
-  final bool isIntroductionShown;
+  SepiaApp(
+      {super.key,
+      required this.isIntroductionShown,
+      required this.isUserLogged,
+      required this.isParent});
+  final bool isIntroductionShown, isUserLogged;
+  final bool? isParent;
+
+  Widget pageToStart() {
+    if (isUserLogged) {
+      return isParent! ? ParentHomePage() : TeacherHomePage();
+    } else {
+      return isIntroductionShown ? StartPage() : IntroductionScreen();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +110,7 @@ class SepiaApp extends StatelessWidget {
         ],
         locale: Locale(consts.languagePrefs[consts.defaultLanguage]!),
         debugShowCheckedModeBanner: false,
-        home: isIntroductionShown ? StartPage() : IntroductionScreen(),
+        home: pageToStart(),
         //choosing the custom color as the primary swatch
         theme: ThemeData(
           primarySwatch: consts.sepiaColor,
@@ -96,7 +119,7 @@ class SepiaApp extends StatelessWidget {
         title: 'Sepia',
         routes: {
           "start_page": (context) => StartPage(),
-          "parent": (context) => const ParentIdSubmit(),
+          "parent": (context) => ParentIdSubmit(),
           "teacher": (context) => const TeacherIdSubmit(),
           "teacher_post": (context) => const TeacherPost(),
           "view_post": (context) => const ViewPost(),
