@@ -9,18 +9,9 @@ class ClassesPage extends StatefulWidget {
 
 class _ClassesPageState extends State<ClassesPage> {
   List _className = [
-    "Kurdish",
-    "English",
-    "Arabic",
-    "Mathmatic",
-    "Kurdish",
-    "English",
-    "Arabic",
-    "Mathmatic",
-    "Kurdish",
-    "English",
-    "Arabic",
-    "Mathmatic",
+    "1st - A",
+    "1st - B",
+    "2nd - C",
   ];
   @override
   Widget build(BuildContext context) {
