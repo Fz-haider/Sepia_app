@@ -86,14 +86,14 @@ Future<dynamic>? getClassesOfTeacher(int teacherID) async {
 }
 
 //getting posts of a teacher
-Future<dynamic>? getPosts(int teacherID) async {
+Future<dynamic>? getPosts(int teacherID, int classID) async {
   final response = await http.post(
     Uri.parse(db_connection_addr_index),
     headers: {
       "Content-Type": "application/json",
     },
     body: jsonEncode({
-      'teacherPosts': {'teacherID': teacherID}
+      'teacherPosts': {'teacherID': teacherID, 'classID': classID}
     }),
     encoding: Encoding.getByName("utf-8"),
   );

@@ -3,6 +3,7 @@ import 'package:sepia_app/db_connection.dart';
 import 'package:sepia_app/images.dart';
 import 'package:sepia_app/models/teacher_class.dart';
 import 'package:sepia_app/constants.dart' as consts;
+import 'package:sepia_app/teacher_Pages/teacher_post.dart';
 
 class ClassesPage extends StatefulWidget {
   const ClassesPage({super.key});
@@ -43,8 +44,10 @@ FutureBuilder<dynamic> getClassesList(int teacherID) {
                   Container(
                       padding: EdgeInsets.all(10),
                       child: InkWell(
-                          onTap: () =>
-                              Navigator.of(context).pushNamed('view_post'),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => TeacherPost(
+                                      classID: classes[index].class_id))),
                           child: Container(
                             padding: EdgeInsets.all(0),
                             decoration: BoxDecoration(

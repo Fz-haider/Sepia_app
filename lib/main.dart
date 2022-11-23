@@ -69,10 +69,17 @@ class SepiaApp extends StatelessWidget {
   final bool isIntroductionShown, isUserLogged;
   final bool? isParent;
 
+  //return the page to start from
   Widget pageToStart() {
+    //if user logged in before, then show the parent or teacher page
+    //based on a boolean in the sharedpreferences
     if (isUserLogged) {
       return isParent! ? ParentHomePage() : TeacherHomePage();
-    } else {
+    }
+    //if user didn't logged in before check if he's seen the
+    //introduction screen page, if he did then show start page
+    //and if not show the introduction screen page
+    else {
       return isIntroductionShown ? StartPage() : IntroductionScreen();
     }
   }
@@ -99,7 +106,7 @@ class SepiaApp extends StatelessWidget {
 
     //make the application ready to display
     return MaterialApp(
-        //adding localization future
+        //adding localization feature
         localizationsDelegates: [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -124,7 +131,7 @@ class SepiaApp extends StatelessWidget {
           "start_page": (context) => StartPage(),
           "parent": (context) => ParentID_Submit(),
           "teacher": (context) => TeacherID_Submit(),
-          "teacher_post": (context) => TeacherPost(),
+          //"teacher_post": (context) => TeacherPost(),
           "view_post": (context) => ViewPost(),
           "parent_home_page": (context) => ParentHomePage(),
           "teacher_home_page": (context) => TeacherHomePage(),
