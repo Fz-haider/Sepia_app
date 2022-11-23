@@ -41,6 +41,9 @@ void main() async {
   bool? isParent = prefs.getBool(consts.prefs_isParent);
   if (isParent != null) {
     isUserLogged = true;
+    //store basic user informations in constants
+    consts.userID = prefs.getInt(consts.prefs_userID)!;
+    consts.isUserParent = isParent;
   }
 
   //load whether the introduction screen is shown before or not
@@ -120,7 +123,7 @@ class SepiaApp extends StatelessWidget {
         routes: {
           "start_page": (context) => StartPage(),
           "parent": (context) => ParentIdSubmit(),
-          "teacher": (context) => const TeacherIdSubmit(),
+          "teacher": (context) => TeacherIdSubmit(),
           "teacher_post": (context) => const TeacherPost(),
           "view_post": (context) => const ViewPost(),
           "parent_home_page": (context) => const ParentHomePage(),
