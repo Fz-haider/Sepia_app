@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kurdish_localization/flutter_kurdish_localization.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:sepia_app/Images.dart';
-import 'package:sepia_app/IntroductionScreen.dart';
-import 'package:sepia_app/StartPage.dart';
-import 'package:sepia_app/parent_Pages/ParentIdSubmit.dart';
-import 'package:sepia_app/parent_Pages/ParentNotification.dart';
-import 'package:sepia_app/parent_Pages/ViewPost.dart';
-import 'package:sepia_app/teacher_Pages/TeacherIdSubmit.dart';
-import 'package:sepia_app/parent_Pages/ParentHomePage.dart';
-import 'package:sepia_app/teacher_Pages/TeacherHomePage.dart';
-import 'package:sepia_app/teacher_Pages/TeacherNotification.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:sepia_app/constants.dart' as consts;
-import 'package:sepia_app/teacher_Pages/TeacherPost.dart';
+import 'package:sepia_app/Images.dart';
+import 'package:sepia_app/introduction_screen.dart';
+import 'package:sepia_app/start_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sepia_app/constants.dart' as consts;
+import 'package:sepia_app/parent_pages/parent_id_submit.dart';
+import 'package:sepia_app/parent_pages/parent_notification.dart';
+import 'package:sepia_app/parent_pages/view_post.dart';
+import 'package:sepia_app/parent_pages/parent_home_page.dart';
+import 'package:sepia_app/teacher_pages/teacher_id_submit.dart';
+import 'package:sepia_app/teacher_pages/teacher_home_page.dart';
+import 'package:sepia_app/teacher_pages/teacher_notification.dart';
+import 'package:sepia_app/teacher_pages/teacher_post.dart';
 
 void main() async {
   //initialize shared preferences
@@ -122,14 +122,14 @@ class SepiaApp extends StatelessWidget {
         title: 'Sepia',
         routes: {
           "start_page": (context) => StartPage(),
-          "parent": (context) => ParentIdSubmit(),
-          "teacher": (context) => TeacherIdSubmit(),
-          "teacher_post": (context) => const TeacherPost(),
-          "view_post": (context) => const ViewPost(),
-          "parent_home_page": (context) => const ParentHomePage(),
-          "teacher_home_page": (context) => const TeacherHomePage(),
-          "teacher_notification": (context) => const TeacherNotification(),
-          "parent_notification": (context) => const ParentNotification(),
+          "parent": (context) => ParentID_Submit(),
+          "teacher": (context) => TeacherID_Submit(),
+          "teacher_post": (context) => TeacherPost(),
+          "view_post": (context) => ViewPost(),
+          "parent_home_page": (context) => ParentHomePage(),
+          "teacher_home_page": (context) => TeacherHomePage(),
+          "teacher_notification": (context) => TeacherNotification(),
+          "parent_notification": (context) => ParentNotification(),
         });
   }
 }

@@ -1,9 +1,9 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:sepia_app/parent_Pages/ClassesPage.dart';
+import 'package:sepia_app/parent_pages/classes_page.dart';
 
-import 'package:sepia_app/parent_Pages/ProfilePage.dart';
-import 'package:sepia_app/parent_Pages/SettingsPage.dart';
+import 'package:sepia_app/parent_pages/profile_page.dart';
+import 'package:sepia_app/parent_pages/settings_page.dart';
 
 class ParentHomePage extends StatefulWidget {
   const ParentHomePage({super.key});

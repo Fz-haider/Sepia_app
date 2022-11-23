@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sepia_app/CustomWidget.dart';
+import 'package:sepia_app/custom_widget.dart';
 import 'package:sepia_app/Images.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

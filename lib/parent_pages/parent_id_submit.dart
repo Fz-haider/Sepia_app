@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:sepia_app/CustomWidget.dart';
-import 'package:sepia_app/DbConnection.dart';
+import 'package:sepia_app/custom_widget.dart';
+import 'package:sepia_app/db_connection.dart';
 import 'package:sepia_app/constants.dart' as consts;
 import 'package:sepia_app/models/student.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ParentIdSubmit extends StatefulWidget {
-  ParentIdSubmit({super.key});
+class ParentID_Submit extends StatefulWidget {
+  ParentID_Submit({super.key});
 
   @override
-  State<ParentIdSubmit> createState() => _ParentIdSubmit();
+  State<ParentID_Submit> createState() => _ParentID_Submit();
 }
 
-class _ParentIdSubmit extends State<ParentIdSubmit> {
+class _ParentID_Submit extends State<ParentID_Submit> {
   late Widget loginInfo;
   late TextEditingController txt_userName, txt_password;
 
-  _ParentIdSubmit() {
+  _ParentID_Submit() {
     //make a widget for displaying login info
     loginInfo = SizedBox();
     txt_userName = TextEditingController();

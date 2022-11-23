@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sepia_app/CustomWidget.dart';
+import 'package:sepia_app/custom_widget.dart';
 import 'package:sepia_app/Images.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sepia_app/DbConnection.dart';
+import 'package:sepia_app/db_connection.dart';
 import 'package:sepia_app/images.dart';
 import 'package:sepia_app/models/teacher_class.dart';
 import 'package:sepia_app/constants.dart' as consts;
