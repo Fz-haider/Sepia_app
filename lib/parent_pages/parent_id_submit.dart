@@ -66,6 +66,9 @@ class _ParentID_Submit extends State<ParentID_Submit> {
               "Submit",
               () {
                 setState(() {
+                  //hide the keyboard
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  //show the teacher info
                   loginInfo =
                       checkStudentInfo(txt_userName.text, txt_password.text);
                 });

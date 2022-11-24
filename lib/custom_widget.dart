@@ -104,7 +104,6 @@ TextFormField customField(
         label: Text(label),
       ),
       maxLength: maxLength == 0 ? null : maxLength,
-      keyboardType: TextInputType.number,
       obscureText: obscureText,
       textAlign: TextAlign.center);
 }

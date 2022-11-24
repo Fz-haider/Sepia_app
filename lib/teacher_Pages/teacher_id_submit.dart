@@ -67,6 +67,9 @@ class _TeacherID_Submit extends State<TeacherID_Submit> {
               "Submit",
               () {
                 setState(() {
+                  //hide the keyboard
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  //show the teacher info
                   loginInfo =
                       checkTeacherInfo(txt_userName.text, txt_password.text);
                 });

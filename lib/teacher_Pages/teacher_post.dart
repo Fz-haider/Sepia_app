@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sepia_app/constants.dart';
 import 'package:sepia_app/db_connection.dart';
 import 'package:sepia_app/images.dart';
 import 'package:sepia_app/models/post.dart';
@@ -34,9 +35,8 @@ class _TeacherPostState extends State<TeacherPost> {
             ),
           ],
         ),
-        backgroundColor: Colors.deepPurple[100],
         body: /**/
-            getPostsOfTeacher(consts.userID, classID),
+            getPostsOfTeacher(consts.userID, classID, refreshPage),
         floatingActionButton: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
@@ -51,9 +51,14 @@ class _TeacherPostState extends State<TeacherPost> {
       ),
     );
   }
+
+  Future<void> refreshPage() async {
+    setState(() {});
+  }
 }
 
-FutureBuilder<dynamic> getPostsOfTeacher(int teacherID, int classID) {
+FutureBuilder<dynamic> getPostsOfTeacher(
+    int teacherID, int classID, Future<void> Function() onRefresh) {
   return FutureBuilder<dynamic>(
     future: getPosts(teacherID, classID),
     builder: (context, snapshot) {
@@ -62,63 +67,98 @@ FutureBuilder<dynamic> getPostsOfTeacher(int teacherID, int classID) {
         for (var obj in snapshot.data!) {
           posts.add(Post.fromJson(obj));
         }
-        return ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: posts.length,
-          itemBuilder: (context, index) {
-            return Container(
-              margin: EdgeInsets.symmetric(vertical: 6),
-              width: double.infinity,
-              height: 300,
-              color: Colors.white,
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      width: double.infinity,
-                      child: ListTile(
-                        trailing: Icon(
-                          Icons.more_vert,
-                          color: Colors.black,
-                        ),
-                        leading: CircleAvatar(
-                          backgroundColor: Colors.black,
-                          radius: 20,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            backgroundImage:
-                                AssetImage("assets/images/teacher.png"),
-                            radius: 18,
-                          ),
-                        ),
-                        title: Text(
-                          posts[index].title,
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
+        return RefreshIndicator(
+            onRefresh: onRefresh,
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                var post = posts[index];
+                var teacherName = post.teacher_f_name +
+                    ' ' +
+                    post.teacher_m_name +
+                    (post.teacher_l_name != null
+                        ? ' ' + post.teacher_l_name!
+                        : '');
+
+                var teacherLogo = post.teacher_picture == null
+                    ? null
+                    : NetworkImage(
+                        db_connection_addr_images + post.teacher_picture!);
+                var postHeader = ListTile(
+                  title: Text(
+                    teacherName,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  ),
+                  subtitle: Text(
+                    post.subject,
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  trailing: Icon(
+                    Icons.more_vert,
+                    color: Colors.black,
+                  ),
+                );
+                if (teacherLogo != null) {
+                  postHeader = ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.black,
+                      radius: 20,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        backgroundImage: teacherLogo,
+                        radius: 19,
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 5,
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      color: Colors.grey[100],
-                      child: Text(
-                        posts[index].p_body ?? '',
+                    title: Text(
+                      teacherName,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
                       ),
                     ),
+                    subtitle: Text(
+                      post.subject,
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    trailing: Icon(
+                      Icons.more_vert,
+                      color: Colors.black,
+                    ),
+                  );
+                }
+                return Container(
+                    child: Card(
+                  margin: EdgeInsets.all(5),
+                  child: Column(
+                    children: [
+                      Container(
+                        child: postHeader,
+                      ),
+                      Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        child: Column(children: [
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                post.title,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              )),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            post.p_body ?? '',
+                          ),
+                        ]),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
-          },
-        );
+                ));
+              },
+            ));
       } else if (snapshot.hasError) {
         return Text('${snapshot.error}');
       }
