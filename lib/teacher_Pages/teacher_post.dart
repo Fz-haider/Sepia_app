@@ -6,18 +6,19 @@ import 'package:sepia_app/models/post.dart';
 import 'package:sepia_app/constants.dart' as consts;
 
 class TeacherPost extends StatefulWidget {
-  TeacherPost({super.key, required this.classID});
+  TeacherPost({super.key, required this.classID, required this.teacherID});
 
-  final int classID;
+  final int classID, teacherID;
 
   @override
-  State<TeacherPost> createState() => _TeacherPostState(classID: classID);
+  State<TeacherPost> createState() =>
+      _TeacherPostState(classID: classID, teacherID: teacherID);
 }
 
 class _TeacherPostState extends State<TeacherPost> {
-  _TeacherPostState({required this.classID});
+  _TeacherPostState({required this.classID, required this.teacherID});
 
-  final int classID;
+  final int classID, teacherID;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class _TeacherPostState extends State<TeacherPost> {
           ],
         ),
         body: /**/
-            getPostsOfTeacher(consts.userID, classID, refreshPage),
+            getPostsOfTeacher(teacherID, classID, refreshPage),
         floatingActionButton: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
@@ -73,18 +74,20 @@ FutureBuilder<dynamic> getPostsOfTeacher(
               scrollDirection: Axis.vertical,
               itemCount: posts.length,
               itemBuilder: (context, index) {
+                //organize the post details
                 var post = posts[index];
-                var teacherName = post.teacher_f_name +
-                    ' ' +
-                    post.teacher_m_name +
-                    (post.teacher_l_name != null
-                        ? ' ' + post.teacher_l_name!
-                        : '');
-
+                //get the full teacher name
+                var teacherName = [
+                  post.teacher_f_name,
+                  post.teacher_m_name,
+                  post.teacher_l_name
+                ].join(' ');
+                //get the teacher picture if it exists
                 var teacherLogo = post.teacher_picture == null
                     ? null
                     : NetworkImage(
                         db_connection_addr_images + post.teacher_picture!);
+                //get the upper part of the post without teacher image
                 var postHeader = ListTile(
                   title: Text(
                     teacherName,
@@ -99,7 +102,9 @@ FutureBuilder<dynamic> getPostsOfTeacher(
                     color: Colors.black,
                   ),
                 );
+                //check if the teacher image was not null
                 if (teacherLogo != null) {
+                  //if it was not null then recreate the upper part with image
                   postHeader = ListTile(
                     leading: CircleAvatar(
                       backgroundColor: Colors.black,
@@ -127,6 +132,7 @@ FutureBuilder<dynamic> getPostsOfTeacher(
                     ),
                   );
                 }
+                //finally return the post image
                 return Container(
                     child: Card(
                   margin: EdgeInsets.all(5),

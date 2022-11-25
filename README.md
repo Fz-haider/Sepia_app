@@ -12,3 +12,7 @@
 2.  storing user ID in shared preferences should be more secure.
 
 3.  use @ symbol in sql commands to make it more secure if needed.
+
+4.  There are too much tasks in the main thread which will decrease the apps performance.
+
+5.  Note that TeacherPost class is used in both cases (teacher and parent) so the ViewPost class of parent is not used, if this class was enough for both of them we will bring it out from teacher_pages package, and if not we will use the ViewPost instead.

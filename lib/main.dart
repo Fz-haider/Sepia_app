@@ -3,6 +3,7 @@ import 'package:flutter_kurdish_localization/flutter_kurdish_localization.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sepia_app/Images.dart';
+import 'package:sepia_app/db_connection.dart';
 import 'package:sepia_app/introduction_screen.dart';
 import 'package:sepia_app/start_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,6 +45,8 @@ void main() async {
     //store basic user informations in constants
     consts.userID = prefs.getInt(consts.prefs_userID)!;
     consts.isUserParent = isParent;
+    //here we try to get class id if the user was parent
+    consts.classID = await getClassID_OfStudent(consts.userID);
   }
 
   //load whether the introduction screen is shown before or not
@@ -132,7 +135,7 @@ class SepiaApp extends StatelessWidget {
           "parent": (context) => ParentID_Submit(),
           "teacher": (context) => TeacherID_Submit(),
           //"teacher_post": (context) => TeacherPost(),
-          "view_post": (context) => ViewPost(),
+          //"view_post": (context) => ViewPost(),
           "parent_home_page": (context) => ParentHomePage(),
           "teacher_home_page": (context) => TeacherHomePage(),
           "teacher_notification": (context) => TeacherNotification(),

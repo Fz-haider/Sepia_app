@@ -63,6 +63,32 @@ Future<dynamic>? getTeacher(String userName, String password) async {
   }
 }
 
+//getting a student from the database
+Future<dynamic>? getClassID_OfStudent(int studentID) async {
+  final response = await http.post(
+    Uri.parse(db_connection_addr_index),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: jsonEncode({
+      'getStudentClassID': {'studentID': studentID}
+    }),
+    encoding: Encoding.getByName("utf-8"),
+  );
+
+  if (response.statusCode == 200) {
+    var result = jsonDecode(response.body);
+    //states for checking the student credentials:
+    //0 - means user name does not exist in database
+    //1 - means user name is correct but password is incorrect
+    //2 - means credentials are right
+    return result;
+  } else {
+    print('Failed to connect to the database!');
+    return null;
+  }
+}
+
 //getting classes of a teacher
 Future<dynamic>? getClassesOfTeacher(int teacherID) async {
   final response = await http.post(
@@ -72,6 +98,28 @@ Future<dynamic>? getClassesOfTeacher(int teacherID) async {
     },
     body: jsonEncode({
       'teacherClasses': {'teacherID': teacherID}
+    }),
+    encoding: Encoding.getByName("utf-8"),
+  );
+
+  if (response.statusCode == 200) {
+    var result = jsonDecode(response.body);
+    return result;
+  } else {
+    print('Failed to connect to the database!');
+    return null;
+  }
+}
+
+//getting classes of a student
+Future<dynamic>? getClassesOfStudent(int classID) async {
+  final response = await http.post(
+    Uri.parse(db_connection_addr_index),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: jsonEncode({
+      'studentClasses': {'classID': classID}
     }),
     encoding: Encoding.getByName("utf-8"),
   );

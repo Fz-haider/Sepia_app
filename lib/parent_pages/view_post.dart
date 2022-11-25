@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
 class ViewPost extends StatefulWidget {
-  const ViewPost({super.key});
+  const ViewPost({super.key, required this.classID});
+
+  final int classID;
 
   @override
-  State<ViewPost> createState() => _ViewPostState();
+  State<ViewPost> createState() => _ViewPostState(classID: classID);
 }
 
 class _ViewPostState extends State<ViewPost> {
+  _ViewPostState({required this.classID});
+
+  final int classID;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
