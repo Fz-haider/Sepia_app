@@ -5,7 +5,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sepia_app/models/student_class.dart';
 import 'package:sepia_app/parent_pages/view_post.dart';
 import 'package:sepia_app/constants.dart' as consts;
-import 'package:sepia_app/teacher_pages/teacher_post.dart';
 
 class ClassesPage extends StatefulWidget {
   const ClassesPage({super.key});
@@ -70,7 +69,7 @@ FutureBuilder<dynamic> getClassesList(int classID) {
                       child: InkWell(
                           onTap: () => Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => TeacherPost(
+                                  builder: (context) => ViewPost(
                                       classID: class_.class_id,
                                       teacherID: class_.teacher_id))),
                           child: Container(

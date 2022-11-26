@@ -15,4 +15,6 @@
 
 4.  There are too much tasks in the main thread which will decrease the apps performance.
 
-5.  Note that TeacherPost class is used in both cases (teacher and parent) so the ViewPost class of parent is not used, if this class was enough for both of them we will bring it out from teacher_pages package, and if not we will use the ViewPost instead.
+5.  (Solved) Note that TeacherPost class is used in both cases (teacher and parent) so the ViewPost class of parent is not used, if this class was enough for both of them we will bring it out from teacher_pages package, and if not we will use the ViewPost instead.
+
+6.  We need a loading screen if we did too much work on the screen.

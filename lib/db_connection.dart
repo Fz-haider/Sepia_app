@@ -154,3 +154,47 @@ Future<dynamic>? getPosts(int teacherID, int classID) async {
     return null;
   }
 }
+
+//get profile details of the student
+Future<dynamic>? getStudentProfile(int studentID) async {
+  final response = await http.post(
+    Uri.parse(db_connection_addr_index),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: jsonEncode({
+      'getStudentProfile': {'studentID': studentID}
+    }),
+    encoding: Encoding.getByName("utf-8"),
+  );
+
+  if (response.statusCode == 200) {
+    var result = jsonDecode(response.body);
+    return result;
+  } else {
+    print('Failed to connect to the database!');
+    return null;
+  }
+}
+
+//get profile details of the teacher
+Future<dynamic>? getTeacherProfile(int teacherID) async {
+  final response = await http.post(
+    Uri.parse(db_connection_addr_index),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: jsonEncode({
+      'getTeacherProfile': {'teacherID': teacherID}
+    }),
+    encoding: Encoding.getByName("utf-8"),
+  );
+
+  if (response.statusCode == 200) {
+    var result = jsonDecode(response.body);
+    return result;
+  } else {
+    print('Failed to connect to the database!');
+    return null;
+  }
+}
