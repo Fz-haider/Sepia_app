@@ -25,21 +25,20 @@ class _ViewPostState extends State<ViewPost> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Post'),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              icon: Icon(Icons.notifications),
-              onPressed: () {
-                Navigator.of(context).pushNamed("parent_notification");
-              },
-            ),
-          ],
-        ),
-        backgroundColor: consts.backgroundColor,
-        body: getPostsOfStudent(teacherID, classID, onRefresh),
-      ),
+          appBar: AppBar(
+            title: Text('Post'),
+            centerTitle: true,
+            actions: [
+              IconButton(
+                icon: Icon(Icons.notifications),
+                onPressed: () {
+                  Navigator.of(context).pushNamed("parent_notification");
+                },
+              ),
+            ],
+          ),
+          backgroundColor: consts.backgroundColor,
+          body: getPostsOfStudent(teacherID, classID, onRefresh)),
     );
   }
 

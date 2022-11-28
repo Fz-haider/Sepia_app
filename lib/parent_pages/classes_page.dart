@@ -16,11 +16,7 @@ class ClassesPage extends StatefulWidget {
 class _ClassesPageState extends State<ClassesPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: Colors.grey[200],
-          body: getClassesList(consts.classID)),
-    );
+    return Scaffold(body: getClassesList(consts.classID));
   }
 }
 
@@ -90,7 +86,7 @@ FutureBuilder<dynamic> getClassesList(int classID) {
                             ),
                             child: Column(children: [
                               Container(
-                                padding: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(14),
                                 child: Text(class_.subject,
                                     style: TextStyle(
                                         fontSize: 20,
@@ -98,9 +94,12 @@ FutureBuilder<dynamic> getClassesList(int classID) {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
+                                  border: Border(
+                                      bottom:
+                                          BorderSide(color: Colors.black26)),
+                                  /*borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(18),
-                                      bottomRight: Radius.circular(18)),
+                                      bottomRight: Radius.circular(18)),*/
                                   image: DecorationImage(
                                       image: AssetImage(Images.LESSON),
                                       fit: BoxFit.fill),

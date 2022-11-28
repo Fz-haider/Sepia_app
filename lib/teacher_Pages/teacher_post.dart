@@ -5,6 +5,7 @@ import 'package:sepia_app/db_connection.dart';
 import 'package:sepia_app/images.dart';
 import 'package:sepia_app/models/post.dart';
 import 'package:sepia_app/constants.dart' as consts;
+import 'package:sepia_app/models/student.dart';
 
 class TeacherPost extends StatefulWidget {
   TeacherPost({super.key, required this.classID, required this.teacherID});
@@ -23,7 +24,8 @@ class _TeacherPostState extends State<TeacherPost> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return DefaultTabController(
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: Text('Post'),
@@ -36,9 +38,37 @@ class _TeacherPostState extends State<TeacherPost> {
               },
             ),
           ],
+          bottom: TabBar(
+              labelColor: consts.sepiaColor,
+              unselectedLabelColor: Colors.white,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicator: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  color: Colors.white),
+              tabs: [
+                Tab(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.newspaper),
+                  ),
+                ),
+                Tab(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.groups),
+                  ),
+                ),
+              ]),
         ),
         backgroundColor: consts.backgroundColor,
-        body: getPostsOfTeacher(teacherID, classID, refreshPage),
+        body: TabBarView(
+          children: [
+            getPostsOfTeacher(teacherID, classID, refreshPage),
+            getStudentsOfClass_(classID, refreshPage)
+          ],
+        ),
         floatingActionButton: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
@@ -76,6 +106,34 @@ FutureBuilder<dynamic> getPostsOfTeacher(
               itemCount: posts.length,
               itemBuilder: (context, index) {
                 return postWidget(posts[index]);
+              },
+            ));
+      } else if (snapshot.hasError) {
+        return Text('${snapshot.error}');
+      }
+
+      return CircularProgressIndicator();
+    },
+  );
+}
+
+FutureBuilder<dynamic> getStudentsOfClass_(
+    int classID, Future<void> Function() onRefresh) {
+  return FutureBuilder<dynamic>(
+    future: getStudentsOfClass(classID),
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        List<Student> students = [];
+        for (var obj in snapshot.data!) {
+          students.add(Student.fromJson(obj));
+        }
+        return RefreshIndicator(
+            onRefresh: onRefresh,
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: students.length,
+              itemBuilder: (context, index) {
+                return studentWidget(students[index]);
               },
             ));
       } else if (snapshot.hasError) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sepia_app/models/post.dart';
 import 'package:sepia_app/constants.dart' as consts;
+import 'package:sepia_app/models/student.dart';
 
 Container gradientColor() {
   return Container(
@@ -193,5 +194,67 @@ Widget postWidget(Post post) {
         ),
       ],
     ),
+  ));
+}
+
+//student widget
+Widget studentWidget(Student st) {
+  //organize the student details
+  //get the full student name
+  var studentName = [st.f_name, st.m_name, st.l_name].join(' ');
+  //get the teacher picture if it exists
+  var studentLogo = st.picture == null
+      ? null
+      : NetworkImage(consts.db_connection_addr_images + st.picture!);
+  //get the upper part of the post without student image
+  var postHeader = ListTile(
+    title: Text(
+      studentName,
+      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+    ),
+    subtitle: Text(
+      'Gender', //st.gender,
+      style: TextStyle(fontSize: 12),
+    ),
+    trailing: Icon(
+      Icons.more_vert,
+      color: Colors.black,
+    ),
+  );
+  //check if the student image was not null
+  if (studentLogo != null) {
+    //if it was not null then recreate the upper part with image
+    postHeader = ListTile(
+      leading: CircleAvatar(
+        backgroundColor: Colors.black,
+        radius: 20,
+        child: CircleAvatar(
+          backgroundColor: Colors.white,
+          backgroundImage: studentLogo,
+          radius: 19,
+        ),
+      ),
+      title: Text(
+        studentName,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 13,
+        ),
+      ),
+      subtitle: Text(
+        'Gender', //st.gender,
+        style: TextStyle(fontSize: 12),
+      ),
+      trailing: Icon(
+        Icons.more_vert,
+        color: Colors.black,
+      ),
+    );
+  }
+  //finally return the student image
+  return Container(
+      child: Card(
+    margin: EdgeInsets.all(5),
+    child: postHeader,
   ));
 }

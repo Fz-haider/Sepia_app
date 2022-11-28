@@ -11,18 +11,23 @@ class Pair<A, B> {
   Pair(this.a, this.b);
 }
 
-//getting a student from the database
-Future<dynamic>? getStudent(String userName, String password) async {
-  final response = await http.post(
+Future<http.Response> createPostRequest(Map<dynamic, dynamic> body) async {
+  //you can check connection and other things here later
+  return await http.post(
     Uri.parse(db_connection_addr_index),
     headers: {
       "Content-Type": "application/json",
     },
-    body: jsonEncode({
-      'studentCheck': {'userName': userName, 'password': password}
-    }),
+    body: jsonEncode(body),
     encoding: Encoding.getByName("utf-8"),
   );
+}
+
+//getting a student from the database
+Future<dynamic>? getStudent(String userName, String password) async {
+  final response = await createPostRequest({
+    'studentCheck': {'userName': userName, 'password': password}
+  });
 
   if (response.statusCode == 200) {
     var result = jsonDecode(response.body);
@@ -39,16 +44,9 @@ Future<dynamic>? getStudent(String userName, String password) async {
 
 //getting a teacher from the database
 Future<dynamic>? getTeacher(String userName, String password) async {
-  final response = await http.post(
-    Uri.parse(db_connection_addr_index),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: jsonEncode({
-      'teacherCheck': {'userName': userName, 'password': password}
-    }),
-    encoding: Encoding.getByName("utf-8"),
-  );
+  final response = await createPostRequest({
+    'teacherCheck': {'userName': userName, 'password': password}
+  });
 
   if (response.statusCode == 200) {
     var result = jsonDecode(response.body);
@@ -65,16 +63,9 @@ Future<dynamic>? getTeacher(String userName, String password) async {
 
 //getting a student from the database
 Future<dynamic>? getClassID_OfStudent(int studentID) async {
-  final response = await http.post(
-    Uri.parse(db_connection_addr_index),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: jsonEncode({
-      'getStudentClassID': {'studentID': studentID}
-    }),
-    encoding: Encoding.getByName("utf-8"),
-  );
+  final response = await createPostRequest({
+    'getStudentClassID': {'studentID': studentID}
+  });
 
   if (response.statusCode == 200) {
     var result = jsonDecode(response.body);
@@ -91,16 +82,9 @@ Future<dynamic>? getClassID_OfStudent(int studentID) async {
 
 //getting classes of a teacher
 Future<dynamic>? getClassesOfTeacher(int teacherID) async {
-  final response = await http.post(
-    Uri.parse(db_connection_addr_index),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: jsonEncode({
-      'teacherClasses': {'teacherID': teacherID}
-    }),
-    encoding: Encoding.getByName("utf-8"),
-  );
+  final response = await createPostRequest({
+    'teacherClasses': {'teacherID': teacherID}
+  });
 
   if (response.statusCode == 200) {
     var result = jsonDecode(response.body);
@@ -113,16 +97,9 @@ Future<dynamic>? getClassesOfTeacher(int teacherID) async {
 
 //getting classes of a student
 Future<dynamic>? getClassesOfStudent(int classID) async {
-  final response = await http.post(
-    Uri.parse(db_connection_addr_index),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: jsonEncode({
-      'studentClasses': {'classID': classID}
-    }),
-    encoding: Encoding.getByName("utf-8"),
-  );
+  final response = await createPostRequest({
+    'studentClasses': {'classID': classID}
+  });
 
   if (response.statusCode == 200) {
     var result = jsonDecode(response.body);
@@ -135,16 +112,9 @@ Future<dynamic>? getClassesOfStudent(int classID) async {
 
 //getting posts of a teacher
 Future<dynamic>? getPosts(int teacherID, int classID) async {
-  final response = await http.post(
-    Uri.parse(db_connection_addr_index),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: jsonEncode({
-      'teacherPosts': {'teacherID': teacherID, 'classID': classID}
-    }),
-    encoding: Encoding.getByName("utf-8"),
-  );
+  final response = await createPostRequest({
+    'teacherPosts': {'teacherID': teacherID, 'classID': classID}
+  });
 
   if (response.statusCode == 200) {
     var result = jsonDecode(response.body);
@@ -157,16 +127,9 @@ Future<dynamic>? getPosts(int teacherID, int classID) async {
 
 //get profile details of the student
 Future<dynamic>? getStudentProfile(int studentID) async {
-  final response = await http.post(
-    Uri.parse(db_connection_addr_index),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: jsonEncode({
-      'getStudentProfile': {'studentID': studentID}
-    }),
-    encoding: Encoding.getByName("utf-8"),
-  );
+  final response = await createPostRequest({
+    'getStudentProfile': {'studentID': studentID}
+  });
 
   if (response.statusCode == 200) {
     var result = jsonDecode(response.body);
@@ -179,16 +142,24 @@ Future<dynamic>? getStudentProfile(int studentID) async {
 
 //get profile details of the teacher
 Future<dynamic>? getTeacherProfile(int teacherID) async {
-  final response = await http.post(
-    Uri.parse(db_connection_addr_index),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: jsonEncode({
-      'getTeacherProfile': {'teacherID': teacherID}
-    }),
-    encoding: Encoding.getByName("utf-8"),
-  );
+  final response = await createPostRequest({
+    'getTeacherProfile': {'teacherID': teacherID}
+  });
+
+  if (response.statusCode == 200) {
+    var result = jsonDecode(response.body);
+    return result;
+  } else {
+    print('Failed to connect to the database!');
+    return null;
+  }
+}
+
+//get students of class
+Future<dynamic>? getStudentsOfClass(int classID) async {
+  final response = await createPostRequest({
+    'getStudentsOfClass': {'classID': classID}
+  });
 
   if (response.statusCode == 200) {
     var result = jsonDecode(response.body);
