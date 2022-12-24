@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:sepia_app/constants.dart';
+import 'package:sepia_app/custom_widget.dart';
 import 'package:sepia_app/db_connection.dart';
 import 'package:sepia_app/images.dart';
 import 'package:sepia_app/models/post.dart';
 import 'package:sepia_app/constants.dart' as consts;
+import 'package:sepia_app/models/student.dart';
 
 class TeacherPost extends StatefulWidget {
-  TeacherPost({super.key, required this.classID});
+  TeacherPost({super.key, required this.classID, required this.teacherID});
 
-  final int classID;
+  final int classID, teacherID;
 
   @override
-  State<TeacherPost> createState() => _TeacherPostState(classID: classID);
+  State<TeacherPost> createState() =>
+      _TeacherPostState(classID: classID, teacherID: teacherID);
 }
 
 class _TeacherPostState extends State<TeacherPost> {
-  _TeacherPostState({required this.classID});
+  _TeacherPostState({required this.classID, required this.teacherID});
 
-  final int classID;
+  final int classID, teacherID;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return DefaultTabController(
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: Text('Post'),
@@ -34,9 +38,37 @@ class _TeacherPostState extends State<TeacherPost> {
               },
             ),
           ],
+          bottom: TabBar(
+              labelColor: consts.sepiaColor,
+              unselectedLabelColor: Colors.white,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicator: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  color: Colors.white),
+              tabs: [
+                Tab(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.newspaper),
+                  ),
+                ),
+                Tab(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Icon(Icons.groups),
+                  ),
+                ),
+              ]),
         ),
-        body: /**/
-            getPostsOfTeacher(consts.userID, classID, refreshPage),
+        backgroundColor: consts.backgroundColor,
+        body: TabBarView(
+          children: [
+            getPostsOfTeacher(teacherID, classID, refreshPage),
+            getStudentsOfClass_(classID, refreshPage)
+          ],
+        ),
         floatingActionButton: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
@@ -73,90 +105,35 @@ FutureBuilder<dynamic> getPostsOfTeacher(
               scrollDirection: Axis.vertical,
               itemCount: posts.length,
               itemBuilder: (context, index) {
-                var post = posts[index];
-                var teacherName = post.teacher_f_name +
-                    ' ' +
-                    post.teacher_m_name +
-                    (post.teacher_l_name != null
-                        ? ' ' + post.teacher_l_name!
-                        : '');
+                return postWidget(posts[index]);
+              },
+            ));
+      } else if (snapshot.hasError) {
+        return Text('${snapshot.error}');
+      }
 
-                var teacherLogo = post.teacher_picture == null
-                    ? null
-                    : NetworkImage(
-                        db_connection_addr_images + post.teacher_picture!);
-                var postHeader = ListTile(
-                  title: Text(
-                    teacherName,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                  ),
-                  subtitle: Text(
-                    post.subject,
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  trailing: Icon(
-                    Icons.more_vert,
-                    color: Colors.black,
-                  ),
-                );
-                if (teacherLogo != null) {
-                  postHeader = ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.black,
-                      radius: 20,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        backgroundImage: teacherLogo,
-                        radius: 19,
-                      ),
-                    ),
-                    title: Text(
-                      teacherName,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13,
-                      ),
-                    ),
-                    subtitle: Text(
-                      post.subject,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    trailing: Icon(
-                      Icons.more_vert,
-                      color: Colors.black,
-                    ),
-                  );
-                }
-                return Container(
-                    child: Card(
-                  margin: EdgeInsets.all(5),
-                  child: Column(
-                    children: [
-                      Container(
-                        child: postHeader,
-                      ),
-                      Container(
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        child: Column(children: [
-                          Container(
-                              width: double.infinity,
-                              child: Text(
-                                post.title,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16),
-                              )),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            post.p_body ?? '',
-                          ),
-                        ]),
-                      ),
-                    ],
-                  ),
-                ));
+      return CircularProgressIndicator();
+    },
+  );
+}
+
+FutureBuilder<dynamic> getStudentsOfClass_(
+    int classID, Future<void> Function() onRefresh) {
+  return FutureBuilder<dynamic>(
+    future: getStudentsOfClass(classID),
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        List<Student> students = [];
+        for (var obj in snapshot.data!) {
+          students.add(Student.fromJson(obj));
+        }
+        return RefreshIndicator(
+            onRefresh: onRefresh,
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: students.length,
+              itemBuilder: (context, index) {
+                return studentWidget(students[index]);
               },
             ));
       } else if (snapshot.hasError) {

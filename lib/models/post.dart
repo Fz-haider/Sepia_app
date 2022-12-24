@@ -30,7 +30,7 @@ class Post {
         teacher_id: int.parse(json['teacher_id']),
         teacher_f_name: json['teacher_f_name'],
         teacher_m_name: json['teacher_m_name'],
-        teacher_l_name: json['teacher_l_name'],
+        teacher_l_name: json['teacher_l_name'] ?? '',
         teacher_picture: json['teacher_picture'],
         class_id: int.parse(json['class_id']),
         subject: json['subject'],

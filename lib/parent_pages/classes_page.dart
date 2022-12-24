@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sepia_app/db_connection.dart';
 import 'package:sepia_app/images.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-class ClassModel {
-  ClassModel({required this.id, required this.title, required this.imageName});
-  int id;
-  String title;
-  String imageName;
-}
+import 'package:sepia_app/models/student_class.dart';
+import 'package:sepia_app/parent_pages/view_post.dart';
+import 'package:sepia_app/constants.dart' as consts;
 
 class ClassesPage extends StatefulWidget {
   const ClassesPage({super.key});
@@ -19,35 +16,44 @@ class ClassesPage extends StatefulWidget {
 class _ClassesPageState extends State<ClassesPage> {
   @override
   Widget build(BuildContext context) {
-    List<ClassModel> _className = [
-      ClassModel(
-          id: 0,
-          title: AppLocalizations.of(context)!.kurdish,
-          imageName: Images.LANGUAGE),
-      ClassModel(
-          id: 1,
-          title: AppLocalizations.of(context)!.science,
-          imageName: Images.SCIENCE),
-      ClassModel(
-          id: 2,
-          title: AppLocalizations.of(context)!.maths,
-          imageName: Images.MATHS),
-      ClassModel(
-          id: 3,
-          title: AppLocalizations.of(context)!.sports,
-          imageName: Images.SPORT),
-      ClassModel(
-          id: 4,
-          title: AppLocalizations.of(context)!.religion,
-          imageName: Images.ISLAMIC)
-    ];
+    return Scaffold(body: getClassesList(consts.classID));
+  }
+}
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.grey[200],
-        body: ListView.builder(
-          itemCount: _className.length,
+FutureBuilder<dynamic> getClassesList(int classID) {
+  return FutureBuilder<dynamic>(
+    future: getClassesOfStudent(classID),
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        List<StudentClass> classes = [];
+        for (var obj in snapshot.data!) {
+          classes.add(StudentClass.fromJson(obj));
+        }
+        return ListView.builder(
+          itemCount: classes.length,
           itemBuilder: (context, index) {
+            //getting current class details
+            var class_ = classes[index];
+            var teacherName = [
+              class_.teacher_f_name,
+              class_.teacher_m_name,
+              class_.teacher_l_name
+            ].join(' ');
+            //get the teacher picture if it exists
+            var teacherLogo = class_.teacher_picture == null
+                ? SizedBox()
+                : CircleAvatar(
+                    backgroundColor: Colors.black,
+                    radius: 20,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      backgroundImage: NetworkImage(
+                          consts.db_connection_addr_images +
+                              class_.teacher_picture!),
+                      radius: 19,
+                    ),
+                  );
+            //finally return the list item
             return Container(
               child: Column(
                 children: [
@@ -57,8 +63,11 @@ class _ClassesPageState extends State<ClassesPage> {
                   Container(
                       padding: EdgeInsets.all(10),
                       child: InkWell(
-                          onTap: () =>
-                              Navigator.of(context).pushNamed('view_post'),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => ViewPost(
+                                      classID: class_.class_id,
+                                      teacherID: class_.teacher_id))),
                           child: Container(
                             padding: EdgeInsets.all(0),
                             decoration: BoxDecoration(
@@ -77,34 +86,48 @@ class _ClassesPageState extends State<ClassesPage> {
                             ),
                             child: Column(children: [
                               Container(
-                                padding: EdgeInsets.all(10),
-                                child: Text(_className[index].title,
+                                padding: EdgeInsets.all(14),
+                                child: Text(class_.subject,
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)),
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
+                                  border: Border(
+                                      bottom:
+                                          BorderSide(color: Colors.black26)),
+                                  /*borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(18),
-                                      bottomRight: Radius.circular(18)),
+                                      bottomRight: Radius.circular(18)),*/
                                   image: DecorationImage(
-                                      image: AssetImage(
-                                          _className[index].imageName),
+                                      image: AssetImage(Images.LESSON),
                                       fit: BoxFit.fill),
                                 ),
                                 height: 160,
                                 //becareful that there is aspect ratio of 2.1
                                 width: 340,
-                              )
+                              ),
+                              Container(
+                                  height: 60,
+                                  padding: EdgeInsets.all(10),
+                                  child: Row(children: [
+                                    teacherLogo,
+                                    SizedBox(width: 10),
+                                    Text(teacherName)
+                                  ]))
                             ]),
                           ))),
                 ],
               ),
             );
           },
-        ),
-      ),
-    );
-  }
+        );
+      } else if (snapshot.hasError) {
+        return Text('${snapshot.error}');
+      }
+
+      return CircularProgressIndicator();
+    },
+  );
 }

@@ -108,6 +108,7 @@ FutureBuilder<dynamic> checkStudentInfo(String userName, String password) {
             //then store basic user information in constants
             consts.userID = student.ID;
             consts.isUserParent = true;
+            consts.classID = student.class_id;
 
             //navigate to the parent home page
             Navigator.of(context)

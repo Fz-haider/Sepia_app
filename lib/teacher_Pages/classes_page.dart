@@ -44,10 +44,12 @@ FutureBuilder<dynamic> getClassesList(int teacherID) {
                   Container(
                       padding: EdgeInsets.all(10),
                       child: InkWell(
-                          onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
+                          onTap: () =>
+                              Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => TeacherPost(
-                                      classID: classes[index].class_id))),
+                                        classID: classes[index].class_id,
+                                        teacherID: consts.userID,
+                                      ))),
                           child: Container(
                             padding: EdgeInsets.all(0),
                             decoration: BoxDecoration(

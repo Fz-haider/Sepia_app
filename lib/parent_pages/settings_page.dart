@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sepia_app/db_connection.dart';
+import 'package:sepia_app/models/student.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sepia_app/constants.dart' as consts;
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -77,6 +81,21 @@ class _SettingsPageState extends State<SettingsPage> {
                   height: 30,
                   width: 40),
               title: Text("Log out"),
+              onTap: () async {
+                //first clear shared preferences
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                //remove is parent boolean and the user id
+                prefs.remove(consts.prefs_isParent);
+                prefs.remove(consts.prefs_userID);
+
+                //then set constants to their default value
+                consts.userID = -1;
+                consts.classID = -1;
+
+                //finally clear navigator and return back to start page
+                Navigator.pushNamedAndRemoveUntil(
+                    context, 'start_page', (route) => false);
+              },
             ),
           ],
         ),
