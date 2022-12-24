@@ -20,6 +20,20 @@ class _ProfilePageState extends State<ProfilePage> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Student st = snapshot.data!;
+              Widget profileImage = SizedBox();
+              if (st.picture != null)
+                profileImage = CircleAvatar(
+                  backgroundColor: consts.sepiaColor,
+                  radius: 40,
+                  child: CircleAvatar(
+                    backgroundImage: Image(
+                            image: NetworkImage(
+                                consts.db_connection_addr_images + st.picture!))
+                        .image,
+                    radius: 39,
+                    backgroundColor: Colors.white,
+                  ),
+                );
               return Container(
                 width: double.infinity,
                 child: Column(
@@ -34,23 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 50),
-                              child: CircleAvatar(
-                                backgroundColor: consts.sepiaColor,
-                                radius: 40,
-                                child: CircleAvatar(
-                                  backgroundImage: st.picture == null
-                                      ? AssetImage(
-                                          'assets/images/teacher.png',
-                                        )
-                                      : Image(
-                                              image: NetworkImage(consts
-                                                      .db_connection_addr_images +
-                                                  st.picture!))
-                                          .image,
-                                  radius: 39,
-                                  backgroundColor: Colors.white,
-                                ),
-                              ),
+                              child: profileImage,
                             ),
                             SizedBox(
                               height: 10,

@@ -27,60 +27,54 @@ class _TeacherPostState extends State<TeacherPost> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Post'),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              icon: Icon(Icons.notifications),
-              onPressed: () {
-                Navigator.of(context).pushNamed("teacher_notification");
-              },
-            ),
-          ],
-          bottom: TabBar(
-              labelColor: consts.sepiaColor,
-              unselectedLabelColor: Colors.white,
-              indicatorSize: TabBarIndicatorSize.label,
-              indicator: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10)),
-                  color: Colors.white),
-              tabs: [
-                Tab(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Icon(Icons.newspaper),
+          appBar: AppBar(
+            title: Text('Post'),
+            centerTitle: true,
+            actions: [
+              IconButton(
+                icon: Icon(Icons.notifications),
+                onPressed: () {
+                  Navigator.of(context).pushNamed("teacher_notification");
+                },
+              ),
+            ],
+            bottom: TabBar(
+                labelColor: consts.sepiaColor,
+                unselectedLabelColor: Colors.white,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicator: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)),
+                    color: Colors.white),
+                tabs: [
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Icon(Icons.newspaper),
+                    ),
                   ),
-                ),
-                Tab(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Icon(Icons.groups),
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Icon(Icons.groups),
+                    ),
                   ),
-                ),
-              ]),
-        ),
-        backgroundColor: consts.backgroundColor,
-        body: TabBarView(
-          children: [
-            getPostsOfTeacher(teacherID, classID, refreshPage),
-            getStudentsOfClass_(classID, refreshPage)
-          ],
-        ),
-        floatingActionButton: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            color: Color.fromRGBO(115, 67, 13, .9),
+                ]),
           ),
-          child: IconButton(
-            color: Colors.white,
-            icon: Icon(Icons.add),
+          backgroundColor: consts.backgroundColor,
+          body: TabBarView(
+            children: [
+              getPostsOfTeacher(teacherID, classID, refreshPage),
+              getStudentsOfClass_(classID, refreshPage)
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.add),
+            backgroundColor: consts.sepiaColor,
+            splashColor: consts.sepiaColor,
             onPressed: () {},
-          ),
-        ),
-      ),
+          )),
     );
   }
 

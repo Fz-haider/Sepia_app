@@ -21,6 +21,20 @@ class _ProfilePageState extends State<ProfilePage> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               Teacher tc = snapshot.data!;
+              Widget profileImage = SizedBox();
+              if (tc.picture != null)
+                profileImage = CircleAvatar(
+                  backgroundColor: consts.sepiaColor,
+                  radius: 40,
+                  child: CircleAvatar(
+                    backgroundImage: Image(
+                            image: NetworkImage(
+                                consts.db_connection_addr_images + tc.picture!))
+                        .image,
+                    radius: 39,
+                    backgroundColor: Colors.white,
+                  ),
+                );
               return Container(
                 width: double.infinity,
                 child: Column(
@@ -34,25 +48,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 50),
-                              child: CircleAvatar(
-                                backgroundColor: consts.sepiaColor,
-                                radius: 40,
-                                child: CircleAvatar(
-                                  backgroundImage: tc.picture == null
-                                      ? AssetImage(
-                                          'assets/images/teacher.png',
-                                        )
-                                      : Image(
-                                              image: NetworkImage(consts
-                                                      .db_connection_addr_images +
-                                                  tc.picture!))
-                                          .image,
-                                  radius: 39,
-                                  backgroundColor: Colors.white,
-                                ),
-                              ),
-                            ),
+                                padding: EdgeInsets.only(top: 50),
+                                child: profileImage),
                             SizedBox(
                               height: 10,
                             ),

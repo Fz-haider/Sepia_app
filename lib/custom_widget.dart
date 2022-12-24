@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:sepia_app/images.dart';
 import 'package:sepia_app/models/post.dart';
 import 'package:sepia_app/constants.dart' as consts;
 import 'package:sepia_app/models/student.dart';
@@ -118,9 +120,12 @@ Widget postWidget(Post post) {
   var teacherName =
       [post.teacher_f_name, post.teacher_m_name, post.teacher_l_name].join(' ');
   //get the teacher picture if it exists
-  var teacherLogo = post.teacher_picture == null
+  NetworkImage? teacherLogo;
+  teacherLogo = post.teacher_picture == null
       ? null
-      : NetworkImage(consts.db_connection_addr_images + post.teacher_picture!);
+      : NetworkImage(
+          consts.db_connection_addr_images + post.teacher_picture!,
+        );
   //get the upper part of the post without teacher image
   var postHeader = ListTile(
     title: Text(
