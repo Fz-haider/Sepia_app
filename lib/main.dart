@@ -17,6 +17,8 @@ import 'package:sepia_app/teacher_pages/teacher_home_page.dart';
 import 'package:sepia_app/teacher_pages/teacher_notification.dart';
 import 'package:sepia_app/teacher_pages/teacher_post.dart';
 
+import 'teacher_Pages/add_post.dart';
+
 void main() async {
   //initialize shared preferences
   WidgetsFlutterBinding.ensureInitialized();
@@ -140,6 +142,7 @@ class SepiaApp extends StatelessWidget {
           "teacher_home_page": (context) => TeacherHomePage(),
           "teacher_notification": (context) => TeacherNotification(),
           "parent_notification": (context) => ParentNotification(),
+          "add_post": (context) => AddPost(),
         });
   }
 }

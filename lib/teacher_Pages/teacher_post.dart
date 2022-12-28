@@ -73,7 +73,9 @@ class _TeacherPostState extends State<TeacherPost> {
             child: Icon(Icons.add),
             backgroundColor: consts.sepiaColor,
             splashColor: consts.sepiaColor,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed("add_post");
+            },
           )),
     );
   }

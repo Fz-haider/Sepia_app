@@ -99,18 +99,24 @@ TextFormField customField(
   String label,
   TextEditingController controller,
   void Function() onTap, {
+  TextAlign alignment = TextAlign.center,
+  String hintText = '',
+  int maxLines = 1,
   int maxLength = 0,
   bool obscureText = false,
 }) {
   return TextFormField(
-      onTap: onTap,
-      controller: controller,
-      decoration: InputDecoration(
-        label: Text(label),
-      ),
-      maxLength: maxLength == 0 ? null : maxLength,
-      obscureText: obscureText,
-      textAlign: TextAlign.center);
+    onTap: onTap,
+    controller: controller,
+    textAlign: alignment,
+    decoration: InputDecoration(
+      label: Text(label),
+      hintText: hintText,
+    ),
+    maxLines: maxLines,
+    maxLength: maxLength == 0 ? null : maxLength,
+    obscureText: obscureText,
+  );
 }
 
 //post widget
